@@ -1,0 +1,44 @@
+/* static/style.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+}
+
+label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+select {
+    font-size: 16px;
+    padding: 8px;
+}
+
+button {
+    font-size: 16px;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#recommendations {
+    margin-top: 20px;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}

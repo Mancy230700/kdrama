@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KDrama Recommendation System</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .jumbotron {
+            background-color: #007bff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .form-control {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .form-control::placeholder {
+            color: #ccc;
+        }
+
+        .input-group-text {
+            background-color: #333;
+            color: #fff;
+            border-color: #333;
+        }
+
+        .card {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .card:hover {
+            background-color: #444;
+        }
+
+        .card-title {
+            color: #007bff;
+        }
+
+        .card-img-top {
+            height: 300px; /* Set the height of the recommendation images */
+            object-fit: cover; /* Ensure the images cover the entire container */
+        }
+    </style>
+</head>
+<body class="container mt-5">
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Korean Drama Recommendation System</h1>
+    </div>
+
+    <form method="POST" action="/" class="mb-4">
+        <div class="form-group">
+            <label for="kdrama_title" class="font-weight-bold">Enter a Korean Drama Title:</label>
+            <div class="input-group">
+                <input type="text" id="kdrama_title" name="kdrama_title" class="form-control" placeholder="e.g., My Love from the Star" required>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Get Recommendations</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    {% if kdrama_title %}
+        <h2 class="mb-3">Top 15 Recommendations for "{{ kdrama_title }}"</h2>
+        <div class="card-deck">
+            {% for recommendation in recommendations %}
+                <div class="card mb-4">
+                    <img src="{{ kdrama_data['img url'].iloc[kdrama_data.index[kdrama_data['Name'] == recommendation].tolist()[0]] }}" class="card-img-top" alt="{{ recommendation }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ recommendation }}</h5>
+                        <p class="card-text">
+                            <strong>Genre:</strong> {{ kdrama_data['Genre'].iloc[kdrama_data.index[kdrama_data['Name'] == recommendation].tolist()[0]] }}<br>
+                            
+                        </p>
+                    </div>
+                </div>
+                {% if loop.index % 3 == 0 and not loop.last %}
+                    </div><div class="card-deck mt-3">
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
